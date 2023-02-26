@@ -47,21 +47,14 @@ const validator = {
   "goods_thumb": {
     "rules": [
       {
-        "format": "string"
+        "format": "file"
       },
       {
         "pattern": "^(http://|https://|/|./|@/)\\S"
       }
     ],
-    "title": "缩略图地址",
-    "label": "缩略图地址"
-  },
-  "goods_banner_imgs": {
-    "rules": [
-      {
-        "format": "array"
-      }
-    ]
+    "title": "商品图片",
+    "label": "商品图片"
   },
   "remain_count": {
     "rules": [
@@ -81,7 +74,9 @@ const validator = {
         "format": "int"
       }
     ],
-    "defaultValue": 0
+    "title": "月销量",
+    "defaultValue": 0,
+    "label": "月销量"
   },
   "total_sell_count": {
     "rules": [
@@ -89,7 +84,9 @@ const validator = {
         "format": "int"
       }
     ],
-    "defaultValue": 0
+    "title": "总销量",
+    "defaultValue": 0,
+    "label": "总销量"
   },
   "comment_count": {
     "rules": [
@@ -97,7 +94,9 @@ const validator = {
         "format": "int"
       }
     ],
-    "defaultValue": 0
+    "title": "评论数",
+    "defaultValue": 0,
+    "label": "评论数"
   },
   "is_on_sale": {
     "rules": [
@@ -115,7 +114,9 @@ const validator = {
         "format": "bool"
       }
     ],
-    "defaultValue": false
+    "title": "是否热销",
+    "defaultValue": false,
+    "label": "是否热销"
   },
   "add_date": {
     "rules": [
@@ -123,9 +124,11 @@ const validator = {
         "format": "timestamp"
       }
     ],
+    "title": "上架时间",
     "defaultValue": {
       "$env": "now"
-    }
+    },
+    "label": "上架时间"
   },
   "last_modify_date": {
     "rules": [
@@ -133,16 +136,20 @@ const validator = {
         "format": "timestamp"
       }
     ],
+    "title": "最后修改时间",
     "defaultValue": {
       "$env": "now"
-    }
+    },
+    "label": "最后修改时间"
   },
   "seller_note": {
     "rules": [
       {
         "format": "string"
       }
-    ]
+    ],
+    "title": "商家备注",
+    "label": "商家备注"
   }
 }
 
