@@ -16,22 +16,18 @@
       </view>
     </view>
     <view class="uni-container">
-      <unicloud-db ref="udb" :collection="collectionList" field="goods_sn,name,keywords,goods_desc,goods_thumb,remain_count,month_sell_count,total_sell_count,comment_count,is_on_sale,is_hot,add_date,last_modify_date,seller_note" :where="where" page-data="replace"
+      <unicloud-db ref="udb" :collection="collectionList" field="goods_sn,name,goods_thumb,remain_count,month_sell_count,total_sell_count,is_on_sale,add_date,last_modify_date,seller_note" :where="where" page-data="replace"
         :orderby="orderby" :getcount="true" :page-size="options.pageSize" :page-current="options.pageCurrent"
         v-slot:default="{data,pagination,loading,error,options}" :options="options" loadtime="manual" @load="onqueryload">
         <uni-table ref="table" :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection" @selection-change="selectionChange">
           <uni-tr>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'goods_sn')" sortable @sort-change="sortChange($event, 'goods_sn')">货号</uni-th>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'name')" sortable @sort-change="sortChange($event, 'name')">名称</uni-th>
-            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'keywords')" sortable @sort-change="sortChange($event, 'keywords')">关键字</uni-th>
-            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'goods_desc')" sortable @sort-change="sortChange($event, 'goods_desc')">详细描述</uni-th>
             <uni-th align="center" sortable @sort-change="sortChange($event, 'goods_thumb')">商品图片</uni-th>
             <uni-th align="center" filter-type="range" @filter-change="filterChange($event, 'remain_count')" sortable @sort-change="sortChange($event, 'remain_count')">库存数量</uni-th>
             <uni-th align="center" filter-type="range" @filter-change="filterChange($event, 'month_sell_count')" sortable @sort-change="sortChange($event, 'month_sell_count')">月销量</uni-th>
             <uni-th align="center" filter-type="range" @filter-change="filterChange($event, 'total_sell_count')" sortable @sort-change="sortChange($event, 'total_sell_count')">总销量</uni-th>
-            <uni-th align="center" filter-type="range" @filter-change="filterChange($event, 'comment_count')" sortable @sort-change="sortChange($event, 'comment_count')">评论数</uni-th>
             <uni-th align="center" sortable @sort-change="sortChange($event, 'is_on_sale')">是否上架</uni-th>
-            <uni-th align="center" sortable @sort-change="sortChange($event, 'is_hot')">是否热销</uni-th>
             <uni-th align="center" filter-type="timestamp" @filter-change="filterChange($event, 'add_date')" sortable @sort-change="sortChange($event, 'add_date')">上架时间</uni-th>
             <uni-th align="center" filter-type="timestamp" @filter-change="filterChange($event, 'last_modify_date')" sortable @sort-change="sortChange($event, 'last_modify_date')">最后修改时间</uni-th>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'seller_note')" sortable @sort-change="sortChange($event, 'seller_note')">商家备注</uni-th>
@@ -40,8 +36,6 @@
           <uni-tr v-for="(item,index) in data" :key="index">
             <uni-td align="center">{{item.goods_sn}}</uni-td>
             <uni-td align="center">{{item.name}}</uni-td>
-            <uni-td align="center">{{item.keywords}}</uni-td>
-            <uni-td align="center">{{item.goods_desc}}</uni-td>
             <uni-td align="center">
               <uni-file-picker v-if="item.goods_thumb && item.goods_thumb.fileType == 'image'" :value="item.goods_thumb" :file-mediatype="item.goods_thumb && item.goods_thumb.fileType" return-type="object" :imageStyles="imageStyles" readonly></uni-file-picker>
               <uni-link v-else :href="item.goods_thumb && item.goods_thumb.url" :text="item.goods_thumb && item.goods_thumb.url"></uni-link>
@@ -49,9 +43,7 @@
             <uni-td align="center">{{item.remain_count}}</uni-td>
             <uni-td align="center">{{item.month_sell_count}}</uni-td>
             <uni-td align="center">{{item.total_sell_count}}</uni-td>
-            <uni-td align="center">{{item.comment_count}}</uni-td>
             <uni-td align="center">{{item.is_on_sale == true ? '✅' : '❌'}}</uni-td>
-            <uni-td align="center">{{item.is_hot == true ? '✅' : '❌'}}</uni-td>
             <uni-td align="center">
               <uni-dateformat :threshold="[0, 0]" :date="item.add_date"></uni-dateformat>
             </uni-td>
@@ -116,15 +108,11 @@
           "fields": {
             "货号": "goods_sn",
             "名称": "name",
-            "关键字": "keywords",
-            "详细描述": "goods_desc",
             "商品图片": "goods_thumb",
             "库存数量": "remain_count",
             "月销量": "month_sell_count",
             "总销量": "total_sell_count",
-            "评论数": "comment_count",
             "是否上架": "is_on_sale",
-            "是否热销": "is_hot",
             "上架时间": "add_date",
             "最后修改时间": "last_modify_date",
             "商家备注": "seller_note"
@@ -235,6 +223,3 @@
     }
   }
 </script>
-
-<style>
-</style>
