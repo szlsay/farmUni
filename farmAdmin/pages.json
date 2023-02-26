@@ -210,6 +210,13 @@
 					}
 				},
 				{
+					"path": "permission/addBatch",
+					"style": {
+						"navigationBarTitleText": "批量新增",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
 					"path": "role/add",
 					"style": {
 						"navigationBarTitleText": "新增角色",

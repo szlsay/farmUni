@@ -9,6 +9,8 @@
 					@click="search">{{$t('common.button.search')}}</button>
 				<button class="uni-button" type="primary" size="mini"
 					@click="navigateTo('./add')">{{$t('common.button.add')}}</button>
+				<button class="uni-button" type="primary" size="mini"
+						@click="navigateTo('./addBatch')">批量{{$t('common.button.add')}}</button>
 				<button class="uni-button" type="warn" size="mini" :disabled="!selectedIndexs.length"
 					@click="delTable">{{$t('common.button.batchDelete')}}</button>
 				<!-- #ifdef H5 -->
