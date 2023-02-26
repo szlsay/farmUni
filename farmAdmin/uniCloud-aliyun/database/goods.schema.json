@@ -41,8 +41,7 @@
 			"fileMediaType": "image",
 			"fileExtName": "jpg,png",
 			"description": "商品缩略图，用于在列表或搜索结果中预览显示",
-			"title": "商品图片",
-			"pattern": "^(http:\/\/|https:\/\/|\/|.\/|@\/)\\S",
+			"title": "商品图片"
 		},
 		"remain_count": {
 			"bsonType": "int",

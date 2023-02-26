@@ -48,9 +48,6 @@ const validator = {
     "rules": [
       {
         "format": "file"
-      },
-      {
-        "pattern": "^(http://|https://|/|./|@/)\\S"
       }
     ],
     "title": "商品图片",
