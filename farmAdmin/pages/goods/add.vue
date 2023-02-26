@@ -1,6 +1,6 @@
 <template>
   <view class="uni-container">
-    <uni-forms ref="form" :model="formData" validateTrigger="bind">
+    <uni-forms ref="form" :model="formData" validateTrigger="bind" :label-width="100">
       <uni-forms-item name="goods_sn" label="货号" required>
         <uni-easyinput placeholder="商品的唯一货号" v-model="formData.goods_sn" trim="both"></uni-easyinput>
       </uni-forms-item>
@@ -19,26 +19,11 @@
       <uni-forms-item name="remain_count" label="库存数量" required>
         <uni-easyinput placeholder="库存数量" type="number" v-model="formData.remain_count"></uni-easyinput>
       </uni-forms-item>
-      <uni-forms-item name="month_sell_count" label="月销量">
-        <uni-easyinput placeholder="月销量" type="number" v-model="formData.month_sell_count"></uni-easyinput>
-      </uni-forms-item>
-      <uni-forms-item name="total_sell_count" label="总销量">
-        <uni-easyinput placeholder="总销量" type="number" v-model="formData.total_sell_count"></uni-easyinput>
-      </uni-forms-item>
-      <uni-forms-item name="comment_count" label="评论数">
-        <uni-easyinput placeholder="累计评论数" type="number" v-model="formData.comment_count"></uni-easyinput>
-      </uni-forms-item>
       <uni-forms-item name="is_on_sale" label="是否上架">
         <switch @change="binddata('is_on_sale', $event.detail.value)" :checked="formData.is_on_sale"></switch>
       </uni-forms-item>
-      <uni-forms-item name="is_hot" label="是否热销">
-        <switch @change="binddata('is_hot', $event.detail.value)" :checked="formData.is_hot"></switch>
-      </uni-forms-item>
       <uni-forms-item name="add_date" label="上架时间">
         <uni-datetime-picker return-type="timestamp" v-model="formData.add_date"></uni-datetime-picker>
-      </uni-forms-item>
-      <uni-forms-item name="last_modify_date" label="最后修改时间">
-        <uni-datetime-picker return-type="timestamp" v-model="formData.last_modify_date"></uni-datetime-picker>
       </uni-forms-item>
       <uni-forms-item name="seller_note" label="商家备注">
         <uni-easyinput placeholder="商家备注，仅商家可见" v-model="formData.seller_note" trim="both"></uni-easyinput>
@@ -81,13 +66,8 @@
         "goods_desc": "",
         "goods_thumb": null,
         "remain_count": null,
-        "month_sell_count": 0,
-        "total_sell_count": 0,
-        "comment_count": 0,
         "is_on_sale": false,
-        "is_hot": false,
         "add_date": null,
-        "last_modify_date": null,
         "seller_note": ""
       }
       return {
