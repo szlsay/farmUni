@@ -1,6 +1,6 @@
 {
 	"pages": [{
-			"path": "pages/list/list",
+			"path": "pages/ucenter/ucenter",
 			"style": {
 				// #ifndef APP-PLUS
 				"enablePullDownRefresh": true,
@@ -104,6 +104,27 @@
 			}
 		}
 		// #endif
+		, {
+			"path": "pages/goods/add",
+			"style": {
+				"navigationBarTitleText": "新增"
+			}
+		}, {
+			"path": "pages/goods/edit",
+			"style": {
+				"navigationBarTitleText": "编辑"
+			}
+		}, {
+			"path": "pages/goods/list",
+			"style": {
+				"navigationBarTitleText": "列表"
+			}
+		}, {
+			"path": "pages/goods/detail",
+			"style": {
+				"navigationBarTitleText": "详情"
+			}
+		}
 	],
 	"subPackages": [{
 			"root": "uni_modules/uni-feedback",

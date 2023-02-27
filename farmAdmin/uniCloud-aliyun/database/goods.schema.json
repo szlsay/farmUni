@@ -3,7 +3,7 @@
 	"required": ["goods_sn", "name", "remain_count"
 	],
 	"permission": {
-		"read": "doc.is_on_sale == true",
+		"read": true,
 		"create": false,
 		"update": false,
 		"delete": false
