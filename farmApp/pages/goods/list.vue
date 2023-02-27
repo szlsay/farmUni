@@ -1,72 +1,107 @@
 <template>
-  <view class="container">
-    <unicloud-db ref="udb" v-slot:default="{data, pagination, loading, hasMore, error}" :collection="collectionList" field="goods_sn,name,keywords,goods_desc,goods_thumb,remain_count,month_sell_count,total_sell_count,comment_count,is_on_sale,is_hot,add_date,last_modify_date">
-      <view v-if="error">{{error.message}}</view>
-      <view v-else-if="data">
-        <uni-list>
-          <uni-list-item v-for="(item, index) in data" :key="index" showArrow :clickable="true" @click="handleItemClick(item._id)">
-            <template v-slot:body>
-              <text>
-                <!-- 此处默认显示为_id，请根据需要自行修改为其他字段 -->
-                <!-- 如果使用了联表查询，请参考生成的 admin 项目中 list.vue 页面 -->
-                {{item._id}}
-              </text>
-            </template>
-          </uni-list-item>
-        </uni-list>
-      </view>
-      <uni-load-more :status="loading?'loading':(hasMore ? 'more' : 'noMore')"></uni-load-more>
-    </unicloud-db>
-    <uni-fab ref="fab" horizontal="right" vertical="bottom" :pop-menu="false" @fabClick="fabClick" />
-  </view>
+	<view class="container">
+		<unicloud-db ref="udb" v-slot:default="{data, pagination, loading, hasMore, error}" :collection="collectionList"
+			field="goods_sn,name,keywords,goods_desc,goods_thumb,remain_count,month_sell_count,total_sell_count,comment_count,is_on_sale,is_hot,add_date,last_modify_date">
+			<view v-if="error">{{error.message}}</view>
+			<view v-else-if="data">
+				<uni-list>
+					<uni-list-item v-for="(item, index) in data" :key="index" showArrow :clickable="true"
+						@click="handleItemClick(item._id)">
+						<template v-slot:body>
+							<view class="item-left">
+								<image :src="item.goods_thumb.path" :mode="aspectFill" class="item-img" />
+							</view>
+							<view class="item-right">
+								<text
+									class="title">{{item.name}}红红火火恍恍惚惚或或或或或或哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
+								<view class="num">
+									<text>月销:{{item.month_sell_count}}</text>
+									<text style="margin-left: 10rpx;">评论:{{item.comment_count}}</text>
+								</view>
+							</view>
+						</template>
+					</uni-list-item>
+				</uni-list>
+			</view>
+			<uni-load-more :status="loading?'loading':(hasMore ? 'more' : 'noMore')"></uni-load-more>
+		</unicloud-db>
+		<uni-fab ref="fab" horizontal="right" vertical="bottom" :pop-menu="false" @fabClick="fabClick" />
+	</view>
 </template>
 
 <script>
-  const db = uniCloud.database()
-  export default {
-    data() {
-      return {
-        collectionList: "goods",
-        loadMore: {
-          contentdown: '',
-          contentrefresh: '',
-          contentnomore: ''
-        }
-      }
-    },
-    onPullDownRefresh() {
-      this.$refs.udb.loadData({
-        clear: true
-      }, () => {
-        uni.stopPullDownRefresh()
-      })
-    },
-    onReachBottom() {
-      this.$refs.udb.loadMore()
-    },
-    methods: {
-      handleItemClick(id) {
-        uni.navigateTo({
-          url: './detail?id=' + id
-        })
-      },
-      fabClick() {
-        // 打开新增页面
-        uni.navigateTo({
-          url: './add',
-          events: {
-            // 监听新增数据成功后, 刷新当前页面数据
-            refreshData: () => {
-              this.$refs.udb.loadData({
-                clear: true
-              })
-            }
-          }
-        })
-      }
-    }
-  }
+	const db = uniCloud.database()
+	export default {
+		data() {
+			return {
+				collectionList: "goods",
+				loadMore: {
+					contentdown: '',
+					contentrefresh: '',
+					contentnomore: ''
+				}
+			}
+		},
+		onPullDownRefresh() {
+			this.$refs.udb.loadData({
+				clear: true
+			}, () => {
+				uni.stopPullDownRefresh()
+			})
+		},
+		onReachBottom() {
+			this.$refs.udb.loadMore()
+		},
+		methods: {
+			handleItemClick(id) {
+				uni.navigateTo({
+					url: './detail?id=' + id
+				})
+			},
+			fabClick() {
+				// 打开新增页面
+				uni.navigateTo({
+					url: './add',
+					events: {
+						// 监听新增数据成功后, 刷新当前页面数据
+						refreshData: () => {
+							this.$refs.udb.loadData({
+								clear: true
+							})
+						}
+					}
+				})
+			}
+		}
+	}
 </script>
 
-<style>
+<style lang="scss" scoped>
+	.item-img {
+		flex: 1;
+		width: 200rpx;
+		height: 180rpx;
+		border-radius: 16rpx;
+	}
+
+	.item-right {
+		margin-left: 10rpx;
+		display: flex;
+		flex-direction: column;
+
+		.title {
+			font-size: 32rpx;
+			font-weight: 600;
+			color: #333333;
+			overflow: hidden;
+			-webkit-line-clamp: 2;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+		}
+		.num{
+			font-size: 28rpx;
+			color: #333333;
+		}
+	}
 </style>
