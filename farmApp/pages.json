@@ -1,6 +1,6 @@
 {
 	"pages": [{
-			"path": "pages/ucenter/ucenter",
+			"path": "pages/goods/list",
 			"style": {
 				// #ifndef APP-PLUS
 				"enablePullDownRefresh": true,
@@ -259,7 +259,7 @@
 		"borderStyle": "black",
 		"backgroundColor": "#FFFFFF",
 		"list": [{
-			"pagePath": "pages/list/list",
+			"pagePath": "pages/goods/list",
 			"iconPath": "static/tabbar/list.png",
 			"selectedIconPath": "static/tabbar/list_active.png",
 			"text": "列表"
