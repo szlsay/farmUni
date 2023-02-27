@@ -9,7 +9,7 @@
 			</view>
 			<view v-else-if="data">
 				<view>
-					<image :src="data.goods_thumb.path" :mode="aspectFill" style="height: 500rpx;"/>
+					<image :src="data.goods_thumb.path" :mode="aspectFill" style="height: 500rpx; width: 100%;"/>
 				</view>
 				<view class=""></view>
 				<view>

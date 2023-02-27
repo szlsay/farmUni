@@ -25,7 +25,6 @@
 			</view>
 			<uni-load-more :status="loading?'loading':(hasMore ? 'more' : 'noMore')"></uni-load-more>
 		</unicloud-db>
-		<uni-fab ref="fab" horizontal="right" vertical="bottom" :pop-menu="false" @fabClick="fabClick" />
 	</view>
 </template>
 
@@ -56,20 +55,6 @@
 			handleItemClick(id) {
 				uni.navigateTo({
 					url: './detail?id=' + id
-				})
-			},
-			fabClick() {
-				// 打开新增页面
-				uni.navigateTo({
-					url: './add',
-					events: {
-						// 监听新增数据成功后, 刷新当前页面数据
-						refreshData: () => {
-							this.$refs.udb.loadData({
-								clear: true
-							})
-						}
-					}
 				})
 			}
 		}
