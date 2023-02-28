@@ -284,7 +284,7 @@
 			"selectedIconPath": "static/tabbar/list_active.png",
 			"text": "列表"
 		}, {
-			"pagePath": "pages/grid/grid",
+			"pagePath": "pages/cart/list",
 			"iconPath": "static/tabbar/grid.png",
 			"selectedIconPath": "static/tabbar/grid_active.png",
 			"text": "宫格"
