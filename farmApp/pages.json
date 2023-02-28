@@ -125,7 +125,31 @@
 				"navigationBarTitleText": "详情"
 			}
 		}
-	],
+	,{
+    "path": "pages/cart/add",
+    "style": {
+        "navigationBarTitleText": "新增"
+    }
+}
+,{
+    "path": "pages/cart/edit",
+    "style": {
+        "navigationBarTitleText": "编辑"
+    }
+}
+,{
+    "path": "pages/cart/list",
+    "style": {
+        "navigationBarTitleText": "列表"
+    }
+}
+,{
+    "path": "pages/cart/detail",
+    "style": {
+        "navigationBarTitleText": "详情"
+    }
+}
+],
 	"subPackages": [{
 			"root": "uni_modules/uni-feedback",
 			"pages": [{
