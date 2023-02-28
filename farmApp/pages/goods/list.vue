@@ -9,7 +9,7 @@
 						@click="handleItemClick(item._id)">
 						<template v-slot:body>
 							<view class="item-left">
-								<image :src="item.goods_thumb.path" :mode="aspectFill" class="item-img" />
+								<image :src="item.goods_thumb.path" mode="aspectFill" class="item-img" />
 							</view>
 							<view class="item-right">
 								<text

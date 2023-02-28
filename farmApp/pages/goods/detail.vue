@@ -9,7 +9,7 @@
 			</view>
 			<view v-else-if="data">
 				<view>
-					<image :src="data.goods_thumb.path" :mode="aspectFill" style="height: 500rpx; width: 100%;"/>
+					<image :src="data.goods_thumb.path" mode="aspectFill" style="height: 500rpx; width: 100%;" />
 				</view>
 				<view class=""></view>
 				<view>
@@ -36,7 +36,8 @@
 	import {
 		enumConverter
 	} from '../../js_sdk/validator/goods.js'
-	const db = uniCloud.database()
+	const db = uniCloud.database();
+	const cartCollectionName = 'cart';
 
 	export default {
 		data() {
@@ -62,20 +63,67 @@
 			}
 		},
 		methods: {
-			handleCart() {
-				// 打开修改页面
-				// uni.navigateTo({
-				// 	url: './edit?id=' + this._id,
-				// 	events: {
-				// 		// 监听修改页面成功修改数据后, 刷新当前页面数据
-				// 		refreshData: () => {
-				// 			this.$refs.udb.loadData({
-				// 				clear: true
-				// 			})
-				// 		}
-				// 	}
-				// })
+			/**
+			 * 提交表单
+			 */
+			async handleCart() {
+				// 使用 clientDB 提交数据
+				let value = {
+					"goods_id": this._id,
+					"qty": 1,
+				}
+
+				let { result } = await db.collection(cartCollectionName).where({
+					goods_id: this._id,
+				}).get()
+				console.log(result);
+				if (result.data.length === 0) {
+					db.collection(cartCollectionName).add(value).then((res) => {
+						uni.showToast({
+							icon: 'none',
+							title: '新增成功'
+						})
+					}).catch((err) => {
+						uni.showModal({
+							content: err.message || '请求服务失败',
+							showCancel: false
+						})
+					})
+				} else {
+					let cartData = result.data[0]
+					cartData.qty += 1
+					db.collection(cartCollectionName).doc(cartData._id) .update({
+						qty: cartData.qty
+					}).then((res) => {
+						uni.showToast({
+							icon: 'none',
+							title: '更新成功'
+						})
+						// this.getOpenerEventChannel().emit('refreshData')
+						// setTimeout(() => uni.navigateBack(), 500)
+					}).catch((err) => {
+						uni.showModal({
+							content: err.message || '请求服务失败',
+							showCancel: false
+						})
+					})
+				}
 			},
+			// handleCart() {
+			// 	this.submitForm()
+			// 	// 打开修改页面
+			// 	// uni.navigateTo({
+			// 	// 	url: './edit?id=' + this._id,
+			// 	// 	events: {
+			// 	// 		// 监听修改页面成功修改数据后, 刷新当前页面数据
+			// 	// 		refreshData: () => {
+			// 	// 			this.$refs.udb.loadData({
+			// 	// 				clear: true
+			// 	// 			})
+			// 	// 		}
+			// 	// 	}
+			// 	// })
+			// },
 			handleBuy() {
 				// this.$refs.udb.remove(this._id, {
 				// 	success: (res) => {

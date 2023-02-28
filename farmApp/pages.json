@@ -124,32 +124,28 @@
 			"style": {
 				"navigationBarTitleText": "详情"
 			}
+		}, {
+			"path": "pages/cart/add",
+			"style": {
+				"navigationBarTitleText": "新增"
+			}
+		}, {
+			"path": "pages/cart/edit",
+			"style": {
+				"navigationBarTitleText": "编辑"
+			}
+		}, {
+			"path": "pages/cart/list",
+			"style": {
+				"navigationBarTitleText": "列表"
+			}
+		}, {
+			"path": "pages/cart/detail",
+			"style": {
+				"navigationBarTitleText": "详情"
+			}
 		}
-	,{
-    "path": "pages/cart/add",
-    "style": {
-        "navigationBarTitleText": "新增"
-    }
-}
-,{
-    "path": "pages/cart/edit",
-    "style": {
-        "navigationBarTitleText": "编辑"
-    }
-}
-,{
-    "path": "pages/cart/list",
-    "style": {
-        "navigationBarTitleText": "列表"
-    }
-}
-,{
-    "path": "pages/cart/detail",
-    "style": {
-        "navigationBarTitleText": "详情"
-    }
-}
-],
+	],
 	"subPackages": [{
 			"root": "uni_modules/uni-feedback",
 			"pages": [{
@@ -302,7 +298,8 @@
 	"uniIdRouter": {
 		"loginPage": "uni_modules/uni-id-pages/pages/login/login-withoutpwd",
 		"needLogin": [
-			"/uni_modules/uni-id-pages/pages/userinfo/userinfo"
+			"/uni_modules/uni-id-pages/pages/userinfo/userinfo",
+			"pages/cart/list"
 		],
 		"resToLogin": true
 	}
