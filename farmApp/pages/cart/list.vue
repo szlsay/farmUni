@@ -1,10 +1,13 @@
 <template>
 	<view class="container">
+		{{$store.state.username}}
 		<uni-list v-for="item in list">
+
 			<uni-list-item>
 				<template v-slot:body>
 					<view class="body-content">
 						<view class="item-left">
+							<radio value="r1" checked="true" />
 							<image :src="getOneData(item.imgurl)" mode="aspectFill" class="item-img" />
 						</view>
 						<view class="item-middle">
@@ -30,7 +33,7 @@
 			}
 		},
 		onShow() {
-			this.getData()
+			// this.getData()
 		},
 
 		methods: {
@@ -48,6 +51,7 @@
 					.then(res => {
 						console.log(res);
 						this.list = res.result.data
+
 					}).catch(err => {
 						console.error(err)
 					}).finally(() => {
@@ -84,11 +88,24 @@
 		justify-content: space-between;
 	}
 
-	.item-img {
-		width: 200rpx;
-		height: 180rpx;
-		border-radius: 16rpx;
+	.item-left {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.item-select {
+			width: 40rpx;
+			height: 40rpx;
+		}
+
+		.item-img {
+			width: 200rpx;
+			height: 180rpx;
+			border-radius: 16rpx;
+		}
+
 	}
+
 
 	.item-middle {
 		margin-left: 10rpx;
