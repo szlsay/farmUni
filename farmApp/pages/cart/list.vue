@@ -5,9 +5,15 @@
 				<template v-slot:body>
 					<view class="body-content">
 						<view class="item-left">
-							<image :src="item.goods_thumb.path" mode="aspectFill" class="item-img" />
+							<image :src="getOneData(item.imgurl)" mode="aspectFill" class="item-img" />
+						</view>
+						<view class="item-middle">
+							<text class="title">{{ getOneData(item.name )}}</text>
+							<text class="num">价格</text>
 						</view>
 						<view class="item-right">
+							<uni-number-box :min="0" :max="999" v-model="item.qty" @blur="blur" @focus="focus"
+								@change="changeValue" />
 						</view>
 					</view>
 				</template>
@@ -15,39 +21,18 @@
 		</uni-list>
 	</view>
 </template>
-
-<!-- :title="getOneData(item.name)" :note="String(item.qty)" :thumb="getOneData(item.imgurl)"
-				thumb-size='lg' -->
-				
-				
 <script>
 	const db = uniCloud.database()
 	export default {
 		data() {
 			return {
-				list: []
-				// collectionList: "cart",
-				// loadMore: {
-				//   contentdown: '',
-				//   contentrefresh: '',
-				//   contentnomore: ''
-				// }
+				list: [],
 			}
 		},
 		onShow() {
-			// this.getData()
+			this.getData()
 		},
 
-		onPullDownRefresh() {
-			this.$refs.udb.loadData({
-				clear: true
-			}, () => {
-				uni.stopPullDownRefresh()
-			})
-		},
-		onReachBottom() {
-			this.$refs.udb.loadMore()
-		},
 		methods: {
 			getOneData(data) {
 				if (data && data.length > 0) {
@@ -57,17 +42,12 @@
 				}
 			},
 			getData() {
-				// db.collection('cart').get().then(res => {
-				// 	console.log(res);
-				// })
 				db.collection('cart,goods')
 					.field('goods_id.goods_thumb.path as imgurl, goods_id.name as name, qty')
-					// .field('goods_id{name,goods_thumb} as goods_info, qty')
 					.get()
 					.then(res => {
 						console.log(res);
 						this.list = res.result.data
-						// this.$refs.alertCode.open(res.result)
 					}).catch(err => {
 						console.error(err)
 					}).finally(() => {
@@ -98,7 +78,46 @@
 </script>
 
 <style lang="scss" scoped>
-	.body-content{
+	.body-content {
+		width: 100%;
 		display: flex;
+		justify-content: space-between;
+	}
+
+	.item-img {
+		width: 200rpx;
+		height: 180rpx;
+		border-radius: 16rpx;
+	}
+
+	.item-middle {
+		margin-left: 10rpx;
+		display: flex;
+		flex-direction: column;
+		padding-left: 10rpx;
+		padding-right: 10rpx;
+		width: 200rpx;
+
+		.title {
+			font-size: 32rpx;
+			font-weight: 600;
+			color: #333333;
+			overflow: hidden;
+			-webkit-line-clamp: 2;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+		}
+
+		.num {
+			margin-top: 10rpx;
+			font-size: 28rpx;
+			color: #333333;
+		}
+	}
+
+	.item-right {
+		align-items: center;
+		justify-content: center;
 	}
 </style>
