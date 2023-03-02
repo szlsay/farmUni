@@ -1,15 +1,15 @@
 <template>
 	<view class="container">
-		<uni-list v-for="item in $store.state.cart.cartList">
+		<uni-list v-for="item in $store.state.cart.cartList" class="list">
 			<uni-list-item>
 				<template v-slot:body>
 					<view class="body-content">
 						<view class="item-left">
-							<radio value="r1" checked="true" />
-							<image :src="getOneData(item.imgurl)" mode="aspectFill" class="item-img" />
+							<radio :checked="item.select" @click="onSelectItem(item)"/>
+							<image :src="item.imgurl" mode="aspectFill" class="item-img" />
 						</view>
 						<view class="item-middle">
-							<text class="title">{{ getOneData(item.name )}}</text>
+							<text class="title">{{item.name}}</text>
 							<text class="num">价格</text>
 						</view>
 						<view class="item-right">
@@ -20,12 +20,21 @@
 				</template>
 			</uni-list-item>
 		</uni-list>
+		<view class="footer">
+			<view>
+				<radio :checked="selectAll" @click="onSelectAll">全选</radio>
+			</view>
+			<view>
+				<button class="mini-btn" type="warn" size="mini">结算</button>
+			</view>
+		</view>
 	</view>
 </template>
 <script>
 	export default {
 		data() {
 			return {
+				selectAll: false,
 			}
 		},
 		onShow() {
@@ -33,12 +42,15 @@
 		},
 
 		methods: {
-			getOneData(data) {
-				if (data && data.length > 0) {
-					return data[0]
-				} else {
-					return ''
-				}
+			onSelectAll() {
+				this.selectAll = !this.selectAll
+				this.$store.state.cart.cartList.map(item => {
+					item.select = this.selectAll
+				})
+			},
+			onSelectItem(data) {
+				data.select = !data.select
+				this.selectAll = !this.$store.state.cart.cartList.some(item => item.select == false)
 			},
 			async getData() {
 				await this.$store.dispatch('cart/getCartList')
@@ -67,6 +79,24 @@
 </script>
 
 <style lang="scss" scoped>
+	.list{
+		margin-bottom: 100rpx;
+	}
+	.footer{
+		position: fixed;
+		bottom: 100rpx;
+		right: 0;
+		left: 0;
+		
+		box-sizing: border-box;
+		padding: 20rpx;
+		height: 100rpx;
+		
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		
+	}
 	.body-content {
 		width: 100%;
 		display: flex;
