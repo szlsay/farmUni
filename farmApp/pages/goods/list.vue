@@ -1,30 +1,30 @@
 <template>
 	<view class="container">
-		<unicloud-db ref="udb" v-slot:default="{data, pagination, loading, hasMore, error}" :collection="collectionList"
-			field="goods_sn,name,keywords,goods_desc,goods_thumb,remain_count,month_sell_count,total_sell_count,comment_count,is_on_sale,is_hot,add_date,last_modify_date">
-			<view v-if="error">{{error.message}}</view>
-			<view v-else-if="data">
-				<uni-list>
-					<uni-list-item v-for="(item, index) in data" :key="index" showArrow :clickable="true"
-						@click="handleItemClick(item._id)">
-						<template v-slot:body>
-							<view class="item-left">
-								<image :src="item.goods_thumb.path" mode="aspectFill" class="item-img" />
-							</view>
-							<view class="item-right">
-								<text
-									class="title">{{item.name}}红红火火恍恍惚惚或或或或或或哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
-								<view class="num">
-									<text>月销:{{item.month_sell_count}}</text>
-									<text style="margin-left: 10rpx;">评论:{{item.comment_count}}</text>
-								</view>
-							</view>
-						</template>
-					</uni-list-item>
-				</uni-list>
-			</view>
-			<uni-load-more :status="loading?'loading':(hasMore ? 'more' : 'noMore')"></uni-load-more>
-		</unicloud-db>
+																																	<!-- 		<unicloud-db ref="udb" v-slot:default="{data, pagination, loading, hasMore, error}" :collection="collectionList"
+																																				field="goods_sn,name,keywords,goods_desc,goods_thumb,remain_count,month_sell_count,total_sell_count,comment_count,is_on_sale,is_hot,add_date,last_modify_date">
+																																				<view v-if="error">{{error.message}}</view>
+																																				<view v-else-if="data">
+																																					<uni-list>
+																																						<uni-list-item v-for="(item, index) in data" :key="index" showArrow :clickable="true"
+																																							@click="handleItemClick(item._id)">
+																																							<template v-slot:body>
+																																								<view class="item-left">
+																																									<image :src="item.goods_thumb.path" mode="aspectFill" class="item-img" />
+																																								</view>
+																																								<view class="item-right">
+																																									<text
+																																										class="title">{{item.name}}</text>
+																																									<view class="num">
+																																										<text>月销:{{item.month_sell_count}}</text>
+																																										<text style="margin-left: 10rpx;">评论:{{item.comment_count}}</text>
+																																									</view>
+																																								</view>
+																																							</template>
+																																						</uni-list-item>
+																																					</uni-list>
+																																				</view>
+																																				<uni-load-more :status="loading?'loading':(hasMore ? 'more' : 'noMore')"></uni-load-more>
+																																			</unicloud-db> -->
 	</view>
 </template>
 

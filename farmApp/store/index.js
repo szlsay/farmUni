@@ -1,14 +1,18 @@
-// 页面路径：store/index.js 
 import Vue from 'vue'
 import Vuex from 'vuex'
+import getters from './getters'
+import user from './modules/user'
+import cart from './modules/cart'
 
-Vue.use(Vuex); //vue的插件机制
+Vue.use(Vuex)
 
-//Vuex.Store 构造器选项
-const store = new Vuex.Store({
-	state: { //存放状态
-		"username": "foo",
-		"age": 18
-	}
+export default new Vuex.Store({
+  state: {},
+  getters,
+  mutations: {},
+  actions: {},
+  modules: {
+    user,
+    cart
+  }
 })
-export default store

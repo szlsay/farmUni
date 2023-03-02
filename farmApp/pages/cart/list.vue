@@ -1,8 +1,6 @@
 <template>
 	<view class="container">
-		{{$store.state.username}}
-		<uni-list v-for="item in list">
-
+		<uni-list v-for="item in $store.state.cart.cartList">
 			<uni-list-item>
 				<template v-slot:body>
 					<view class="body-content">
@@ -25,15 +23,13 @@
 	</view>
 </template>
 <script>
-	const db = uniCloud.database()
 	export default {
 		data() {
 			return {
-				list: [],
 			}
 		},
 		onShow() {
-			// this.getData()
+			this.getData()
 		},
 
 		methods: {
@@ -44,19 +40,8 @@
 					return ''
 				}
 			},
-			getData() {
-				db.collection('cart,goods')
-					.field('goods_id.goods_thumb.path as imgurl, goods_id.name as name, qty')
-					.get()
-					.then(res => {
-						console.log(res);
-						this.list = res.result.data
-
-					}).catch(err => {
-						console.error(err)
-					}).finally(() => {
-						uni.hideLoading()
-					})
+			async getData() {
+				await this.$store.dispatch('cart/getCartList')
 			},
 			handleItemClick(id) {
 				uni.navigateTo({
