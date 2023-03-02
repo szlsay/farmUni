@@ -1,6 +1,6 @@
 <template>
 	<view class="container">
-		<uni-list v-for="item in $store.state.cart.cartList" class="list">
+		<uni-list v-for="item in $store.state.cart.cartList">
 			<uni-list-item>
 				<template v-slot:body>
 					<view class="body-content">
@@ -13,8 +13,7 @@
 							<text class="num">价格</text>
 						</view>
 						<view class="item-right">
-							<uni-number-box :min="0" :max="999" v-model="item.qty" @blur="blur" @focus="focus"
-								@change="changeValue" />
+							<uni-number-box :min="0" :max="item.remain_count" v-model="item.qty"/>
 						</view>
 					</view>
 				</template>
@@ -25,7 +24,7 @@
 				<radio :checked="selectAll" @click="onSelectAll">全选</radio>
 			</view>
 			<view>
-				<button class="mini-btn" type="warn" size="mini">结算</button>
+				<button class="mini-btn" type="warn" size="mini" @click="onClickBuy">结算</button>
 			</view>
 		</view>
 	</view>
@@ -42,6 +41,12 @@
 		},
 
 		methods: {
+			onClickBuy() {
+				const goods = this.$store.state.cart.cartList.filter(item => item.select == true).map(obj => {
+					return {'goods_id': obj.goodsId, 'qty': obj.qty}
+				})
+				console.log(goods);
+			},
 			onSelectAll() {
 				this.selectAll = !this.selectAll
 				this.$store.state.cart.cartList.map(item => {
@@ -54,34 +59,12 @@
 			},
 			async getData() {
 				await this.$store.dispatch('cart/getCartList')
-			},
-			handleItemClick(id) {
-				uni.navigateTo({
-					url: './detail?id=' + id
-				})
-			},
-			fabClick() {
-				// 打开新增页面
-				uni.navigateTo({
-					url: './add',
-					events: {
-						// 监听新增数据成功后, 刷新当前页面数据
-						refreshData: () => {
-							this.$refs.udb.loadData({
-								clear: true
-							})
-						}
-					}
-				})
 			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.list{
-		margin-bottom: 100rpx;
-	}
 	.footer{
 		position: fixed;
 		bottom: 100rpx;
