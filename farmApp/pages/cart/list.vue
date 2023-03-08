@@ -37,15 +37,25 @@
 			}
 		},
 		onShow() {
-			this.getData()
+			// this.getData()
 		},
 
 		methods: {
 			onClickBuy() {
-				const goods = this.$store.state.cart.cartList.filter(item => item.select == true).map(obj => {
-					return {'goods_id': obj.goodsId, 'qty': obj.qty}
-				})
-				console.log(goods);
+				console.log(this.$store.unregisterModule())
+				// const db = uniCloud.database();
+				// const order = db.collection('order')
+				// const order = uniCloud.importObject('order')
+				// order.add().then(res => {
+				// 	console.log(res)
+				// }).catch(e => {
+				// 	console.log(e)
+				// })
+				
+				// const goods = this.$store.state.cart.cartList.filter(item => item.select == true).map(obj => {
+				// 	return {'goods_id': obj.goodsId, 'qty': obj.qty}
+				// })
+				// console.log(goods);
 			},
 			onSelectAll() {
 				this.selectAll = !this.selectAll

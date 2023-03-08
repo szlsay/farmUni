@@ -1,0 +1,89 @@
+{
+	"bsonType": "object",
+	"required": ["uid"],
+	"permission": {
+		"read": "doc.uid == auth.uid",
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"uid": {
+			"bsonType": "string",
+			"description": "用户的唯一id",
+			"title": "用户id",
+			"forceDefaultValue": {
+				"$env": "uid"
+			},
+			"foreignKey": "uni-id-users._id"
+		},
+		"create_date": {
+			"bsonType": "timestamp",
+			"description": "创建时间",
+			"title": "创建时间",
+			"defaultValue": {
+				"$env": "now"
+			}
+		},
+		"pay_date": {
+			"bsonType": "timestamp",
+			"description": "付款时间",
+			"title": "付款时间"
+		},
+		"shipment_date": {
+			"bsonType": "timestamp",
+			"description": "发货时间",
+			"title": "发货时间"
+		},
+		"complete_date": {
+			"bsonType": "timestamp",
+			"description": "成交时间",
+			"title": "成交时间"
+		},
+		"status": {
+			"bsonType": "int",
+			"description": "订单状态",
+			"title": "订单状态",
+			"enum": [{
+					"text": "已取消",
+					"value": 0
+				},
+				{
+					"text": "待付款",
+					"value": 1
+				},
+				{
+					"text": "待发货",
+					"value": 2
+				},
+				{
+					"text": "待收货",
+					"value": 3
+				},
+				{
+					"text": "已收货",
+					"value": 4
+				},
+				{
+					"text": "已完成",
+					"value": 5
+				},
+				{
+					"text": "已关闭",
+					"value": 6
+				},
+				{
+					"text": "退款中",
+					"value": 7
+				},
+				{
+					"text": "已退款",
+					"value": 8
+				}
+			]
+		}
+	}
+}
