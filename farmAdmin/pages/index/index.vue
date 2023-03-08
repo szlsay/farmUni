@@ -8,9 +8,8 @@
 		</view>
 		<view class="uni-container">
 
-			<uni-notice-bar v-if="showAddAppId" showGetMore showIcon class="mb-m pointer" text="检测到您还未添加应用，点击前往应用管理添加" @click="toAddAppId" />
-			<uni-notice-bar v-if="!deviceTableData.length && !userTableData.length && !query.platform_id && complete" showGetMore showIcon class="mb-m pointer" text="暂无数据, 统计相关功能需开通 uni 统计后才能使用, 如未开通, 点击查看具体流程" @click="navTo('https://uniapp.dcloud.io/uni-stat-v2.html')" />
-
+			<uni-notice-bar v-if="showAddAppId" showGetMore showIcon class="mb-m pointer" text="检测到您还未添加应用，点击前往应用管理添加"
+				@click="toAddAppId" />
 			<view class="uni-stat--x mb-m">
 				<uni-stat-tabs label="平台选择" type="boldLine" mode="platform" v-model="query.platform_id" />
 			</view>
@@ -29,7 +28,8 @@
 					<uni-tr v-for="(item ,i) in deviceTableData" :key="i">
 						<block v-for="(mapper, index) in deviceTableFields" :key="index">
 							<uni-td v-if="mapper.field === 'appid'" align="center">
-								<view v-if="item.appid" @click="navTo('/pages/uni-stat/device/overview/overview', item.appid)"
+								<view v-if="item.appid"
+									@click="navTo('/pages/uni-stat/device/overview/overview', item.appid)"
 									class="link-btn-color">
 									{{item[mapper.field] !== undefined ? item[mapper.field] : '-'}}
 								</view>
@@ -57,7 +57,8 @@
 					<uni-tr v-for="(item ,i) in userTableData" :key="i">
 						<block v-for="(mapper, index) in userTableFields" :key="index">
 							<uni-td v-if="mapper.field === 'appid'" align="center">
-								<view v-if="item.appid" @click="navTo('/pages/uni-stat/user/overview/overview', item.appid)"
+								<view v-if="item.appid"
+									@click="navTo('/pages/uni-stat/user/overview/overview', item.appid)"
 									class="link-btn-color">
 									{{item[mapper.field] !== undefined ? item[mapper.field] : '-'}}
 								</view>
@@ -119,16 +120,24 @@
 				total: 0,
 				loading: false,
 				complete: false,
-				statSetting:{
-					mode:"",
-					day:7
+				statSetting: {
+					mode: "",
+					day: 7
 				},
-				statModeList:[
-					{"value": "open","text": "开启"	},
-					{"value": "close","text": "关闭"	},
-					{"value": "auto","text": "节能" },
+				statModeList: [{
+						"value": "open",
+						"text": "开启"
+					},
+					{
+						"value": "close",
+						"text": "关闭"
+					},
+					{
+						"value": "auto",
+						"text": "节能"
+					},
 				],
-				showAddAppId:false
+				showAddAppId: false
 			}
 		},
 		onReady() {
@@ -162,7 +171,7 @@
 			}
 		},
 		methods: {
-			getAllData(queryStr){
+			getAllData(queryStr) {
 				this.getApps(this.queryStr, deviceFeildsMap, 'device')
 				this.getApps(this.queryStr, userFeildsMap, 'user')
 			},
@@ -293,25 +302,25 @@
 				}
 			},
 
-			toUrl(url){
+			toUrl(url) {
 				// #ifdef H5
-				window.open(url,"_blank");
+				window.open(url, "_blank");
 				// #endif
 			},
 
-			toAddAppId(){
+			toAddAppId() {
 				this.showAddAppId = false;
 				uni.navigateTo({
-					url:"/pages/system/app/list",
-					events:{
-						refreshData:()=>{
+					url: "/pages/system/app/list",
+					events: {
+						refreshData: () => {
 							this.checkAppId();
 						}
 					}
 				})
 			},
 
-			async checkAppId(){
+			async checkAppId() {
 				const db = uniCloud.database();
 				let res = await db.collection('opendb-app-list').count();
 				this.showAddAppId = (!res.result || res.result.total === 0) ? true : false;
@@ -332,27 +341,34 @@
 		padding: 10px 0;
 		margin-bottom: 15px;
 	}
+
 	.uni-table-scroll {
 		min-height: auto;
 	}
+
 	.link-btn-color {
 		color: #007AFF;
 		cursor: pointer;
 	}
-	.uni-stat-text{
+
+	.uni-stat-text {
 		color: #606266;
 	}
-	.mt10{
+
+	.mt10 {
 		margin-top: 10px;
 	}
-	.uni-radio-cell{
+
+	.uni-radio-cell {
 		margin: 0 10px;
 	}
+
 	.uni-stat-tooltip-s {
 		width: 400px;
 		white-space: normal;
 	}
-	.uni-a{
+
+	.uni-a {
 		cursor: pointer;
 		text-decoration: underline;
 		color: #555;

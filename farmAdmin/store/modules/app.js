@@ -14,7 +14,8 @@ export default {
 		routes: [],
 		theme: uni.getStorageSync(uniAdminCacheKey.theme) || 'default',
 		// #ifndef VUE3
-		appName: process.env.VUE_APP_NAME || '',
+		// appName: process.env.VUE_APP_NAME || '',
+		appName: '福缘管理后台',
 		appid: statConfig && statConfig.appid || '',
 		// #endif
 		// #ifdef VUE3
